@@ -1,5 +1,6 @@
 package sorting
 
+// merge function as used in quick and merge sort algorithms
 func merge(left []int, right []int) []int {
 	merged := make([]int, len(left) + len(right))
 
