@@ -6,11 +6,28 @@ import (
 )
 
 func TestSelectionSortWorstCase(t *testing.T) {
-	sorted := []int32{1, 2, 3, 4, 5}
+	given := []int32{5, 4, 3, 2, 1}
+	expected := []int32{1, 2, 3, 4, 5}
 
-	list := []int32{5, 4, 3, 2, 1}
+	result := SelectionSort(given)
 
-	result:= SelectionSort(list)
+	assert.Equal(t, result, expected)
+}
 
-	assert.Equal(t, result, sorted)
+func TestSelectionSortWorstCaseOneItem(t *testing.T) {
+	given := []int32{1}
+	expected := []int32{1}
+
+	result := SelectionSort(given)
+
+	assert.Equal(t, result, expected)
+}
+
+func TestSelectionSortWorstCaseNoItem(t *testing.T) {
+	given := []int32{}
+	expected := []int32{}
+
+	result := SelectionSort(given)
+
+	assert.Equal(t, result, expected)
 }

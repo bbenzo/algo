@@ -12,3 +12,19 @@ func TestMergeSort(t *testing.T) {
 	result := MergeSort(given)
 	assert.Equal(t, expected, result)
 }
+
+func TestMergeSortOneItem(t *testing.T) {
+	given := []int{23}
+	expected := []int{23}
+
+	result := MergeSort(given)
+	assert.Equal(t, expected, result)
+}
+
+func TestMergeSortNoItem(t *testing.T) {
+	given := []int{}
+	expected := []int{}
+
+	result := MergeSort(given)
+	assert.Equal(t, expected, result)
+}
