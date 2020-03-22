@@ -3,10 +3,10 @@ package searching
 // BinarySearch returns position of item in list
 func BinarySearch(a int, sortedList []int) int {
 	left := 0
-	right := len(sortedList)
+	right := len(sortedList) - 1
 
 	for left <= right {
-		i := int(right / 2)
+		i := int(right + left / 2)
 
 		if a == sortedList[i] {
 			return i
