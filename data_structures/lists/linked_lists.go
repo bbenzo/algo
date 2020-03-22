@@ -18,6 +18,20 @@ func New(data ...interface{}) DoublyLinkedList {
 	return list
 }
 
+func (list DoublyLinkedList) Head() *Node {
+	if len(list) == 0 {
+		return nil
+	}
+	return &list[0]
+}
+
+func (list DoublyLinkedList) Tail() *Node {
+	if len(list) == 0 {
+		return nil
+	}
+	return &list[len(list) - 1]
+}
+
 func Append(list DoublyLinkedList, data interface{}) DoublyLinkedList {
 	if len(list) == 0 {
 		return DoublyLinkedList{
