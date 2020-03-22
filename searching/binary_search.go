@@ -10,14 +10,10 @@ func BinarySearch(a int, sortedList []int) int {
 
 		if a == sortedList[i] {
 			return i
-		}
-
-		if a < sortedList[i] {
-			right = i
-		}
-
-		if a > sortedList[i] {
+		} else if a > sortedList[i] {
 			left = i + 1
+		} else {
+			right = i - 1
 		}
 	}
 	return -1

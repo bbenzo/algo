@@ -18,5 +18,5 @@ func TestBinarySearchNotPresent(t *testing.T) {
 	search := 3
 	result := BinarySearch(search, list)
 
-	assert.NotEqual(t, -1, result)
+	assert.Equal(t, -1, result)
 }
