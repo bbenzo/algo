@@ -18,18 +18,18 @@ func New(data ...interface{}) DoublyLinkedList {
 	return list
 }
 
-func (list DoublyLinkedList) Head() *Node {
+func (list DoublyLinkedList) Head() interface{} {
 	if len(list) == 0 {
 		return nil
 	}
-	return &list[0]
+	return list[0].Data
 }
 
-func (list DoublyLinkedList) Tail() *Node {
+func (list DoublyLinkedList) Tail() interface{} {
 	if len(list) == 0 {
 		return nil
 	}
-	return &list[len(list) - 1]
+	return list[len(list) - 1].Data
 }
 
 func Append(list DoublyLinkedList, data interface{}) DoublyLinkedList {
@@ -71,8 +71,14 @@ func Insert(list DoublyLinkedList, d interface{}, i int) DoublyLinkedList {
 	var second = make([]Node, len(list[i:]))
 	copy(second, list[i:])
 
-	last := &first[len(first)-1]
-	last.Next = &node
+	var last *Node
+	if len(first) > 1 {
+		last = &first[len(first)-1]
+		last.Next = &node
+	} else {
+		last = nil
+	}
+
 	node.Last = last
 	node.Next = &second[0]
 	second[0].Last = &node
@@ -119,6 +125,15 @@ func main() {
 	list = Insert(list, 5, 4)
 
 	list = Remove(list, 3)
+
+	fmt.Printf("Head %v ", list.Head())
+	fmt.Printf("Tail %v\n\n", list.Tail())
+
+	list = Insert(list, 9, 0)
+	list = Append(list, 19)
+
+	fmt.Printf("Head %v ", list.Head())
+	fmt.Printf("Tail %v\n\n", list.Tail())
 
 	for _, el := range list {
 		fmt.Printf("[Element: %v] \n", el.Data)
