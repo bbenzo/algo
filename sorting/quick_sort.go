@@ -7,12 +7,12 @@ func QuickSort(array []int) []int {
 }
 
 func partition(arr []int, pivotIdx int, leftIdx int, rightIdx int) []int {
-	if len(arr) < 2 {
+	if len(arr) < 2 || rightIdx < 0 {
 		return arr
 	}
 
 	foundLeft := false
-	for leftIdx < rightIdx && leftIdx < pivotIdx {
+	for leftIdx < rightIdx {
 		if arr[leftIdx] > arr[pivotIdx] {
 			foundLeft = true
 			break
@@ -21,7 +21,7 @@ func partition(arr []int, pivotIdx int, leftIdx int, rightIdx int) []int {
 	}
 
 	foundRight := false
-	for rightIdx >= leftIdx && rightIdx > -1 {
+	for rightIdx >= leftIdx {
 		if arr[rightIdx] < arr[pivotIdx] {
 			foundRight = true
 			break
