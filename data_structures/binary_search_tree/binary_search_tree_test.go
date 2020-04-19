@@ -47,3 +47,24 @@ func TestBinarySearchTree_InsertMultipleNodeSmallerAndLarger(t *testing.T) {
 	assert.Equal(t, 8, tree.Root.Right.Right.Value)
 	assert.Equal(t, 1, tree.Root.Left.Left.Left.Value)
 }
+
+func TestBinarySearchTree_RemoveLeafNode(t *testing.T) {
+	tree := BinarySearchTree{}
+	tree.Insert(5)
+	tree.Insert(4)
+	tree.Insert(7)
+	tree.Insert(2)
+	tree.Insert(6)
+	tree.Insert(8)
+	tree.Insert(1)
+
+	tree.Remove(1)
+
+	assert.Equal(t, 5, tree.Root.Value)
+	assert.Equal(t, 4, tree.Root.Left.Value)
+	assert.Equal(t, 7, tree.Root.Right.Value)
+	assert.Equal(t, 2, tree.Root.Left.Left.Value)
+	assert.Equal(t, 6, tree.Root.Right.Left.Value)
+	assert.Equal(t, 8, tree.Root.Right.Right.Value)
+	assert.Equal(t, (*Node)(nil), tree.Root.Left.Left.Left)
+}
