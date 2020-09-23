@@ -6,7 +6,7 @@ func BinarySearch(a int, sortedList []int) int {
 	right := len(sortedList) - 1
 
 	for left <= right {
-		i := int(right + left / 2)
+		i := right + left / 2
 
 		if a == sortedList[i] {
 			return i
