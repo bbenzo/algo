@@ -7,22 +7,23 @@ func QuickSort(arr []int) []int {
 		return arr
 	}
 
-	left, right := divideQuickSort(arr)
-	left, right = QuickSort(left), QuickSort(right)
-	return append(left, right...)
-}
-
-func divideQuickSort(arr []int) ([]int, []int) {
-	right := len(arr) - 1
+	// find random pivot
 	pivot := rand.Int() % len(arr)
 
-	arr[pivot], arr[right] = arr[right], arr[pivot]
+	// move pivot to end of array
+	lastIndex := len(arr) - 1
+	arr[pivot], arr[lastIndex] = arr[lastIndex], arr[pivot]
 
-	for i := range arr {
-		if arr[i] > arr[right] {
-			arr[i], arr[right] = arr[right], arr[i]
+	higherThanIndex, unknownIndex := 0, 0
+
+	for unknownIndex < lastIndex {
+		if arr[unknownIndex] <= arr[lastIndex] {
+			arr[higherThanIndex], arr[unknownIndex] = arr[unknownIndex], arr[higherThanIndex]
+			higherThanIndex++
 		}
+		unknownIndex++
 	}
 
-	return arr[:pivot], arr[pivot:]
+	left, right := QuickSort(arr[:higherThanIndex]), QuickSort(arr[higherThanIndex:])
+	return append(left, right...)
 }
