@@ -1,55 +1,28 @@
 package sorting
 
-func QuickSort(array []int) []int {
-	n := len(array)
-	pivotIndex := n - 1
-	return partition(array, pivotIndex, 0, pivotIndex - 1)
-}
+import "math/rand"
 
-func partition(arr []int, pivotIdx int, leftIdx int, rightIdx int) []int {
-	if len(arr) < 2 || rightIdx < 0 {
+func QuickSort(arr []int) []int {
+	if len(arr) < 2 {
 		return arr
 	}
 
-	foundLeft := false
-	for leftIdx < rightIdx {
-		if arr[leftIdx] > arr[pivotIdx] {
-			foundLeft = true
-			break
-		}
-		leftIdx++
-	}
-
-	foundRight := false
-	for rightIdx >= leftIdx {
-		if arr[rightIdx] < arr[pivotIdx] {
-			foundRight = true
-			break
-		}
-		rightIdx--
-	}
-
-	if foundLeft && foundRight {
-		swap(arr, leftIdx, rightIdx)
-		partition(arr, pivotIdx, leftIdx, rightIdx)
-	}
-
-	if leftIdx > rightIdx {
-		swap(arr, leftIdx, pivotIdx)
-
-		partition1 := arr[0:leftIdx]
-		pivotIndex1 := len(partition1) - 1
-		partition2 := arr[leftIdx:]
-		pivotIndex2 := len(partition2) - 1
-
-		partition(partition1, pivotIndex1, 0, pivotIndex1-1)
-		partition(partition2, pivotIndex2, 0, pivotIndex2-1)
-	}
-	return arr
+	left, right := divideQuickSort(arr)
+	left, right = QuickSort(left), QuickSort(right)
+	return append(left, right...)
 }
 
-func swap(arr []int, leftIdx int, rightIdx int) {
-	swap := arr[leftIdx]
-	arr[leftIdx] = arr[rightIdx]
-	arr[rightIdx] = swap
+func divideQuickSort(arr []int) ([]int, []int) {
+	right := len(arr) - 1
+	pivot := rand.Int() % len(arr)
+
+	arr[pivot], arr[right] = arr[right], arr[pivot]
+
+	for i := range arr {
+		if arr[i] > arr[right] {
+			arr[i], arr[right] = arr[right], arr[i]
+		}
+	}
+
+	return arr[:pivot], arr[pivot:]
 }

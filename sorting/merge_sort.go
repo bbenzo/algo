@@ -5,42 +5,25 @@ func MergeSort(arr []int) []int {
 		return arr
 	}
 
-	left, right := divide(arr)
-
-	return merge(MergeSort(left), MergeSort(right))
+	pivot := len(arr) / 2
+	return merge(MergeSort(arr[pivot:]), MergeSort(arr[:pivot]))
 }
 
-func divide(arr []int) ([]int, []int) {
-	length := len(arr)
-	m := int(length / 2)
-	left := arr[0:m]
-	right := arr[m:]
-	return left, right
-}
+func merge(arr1, arr2 []int) []int {
+	result := make([]int, len(arr1)+len(arr2))
 
-func merge(left []int, right []int) []int {
-	merged := make([]int, len(left)+len(right))
-
-	i := 0
-	for len(left) > 0 && len(right) > 0 {
-		if left[0] < right[0] {
-			merged[i] = left[0]
-			left = left[1:]
+	count1, count2 := 0, 0
+	for i := range result {
+		if count1 >= len(arr1) {
+			result[i] = arr2[count2]
+			count2++
+		} else if count2 >= len(arr2) || arr1[count1] <= arr2[count2] {
+			result[i] = arr1[count1]
+			count1++
 		} else {
-			merged[i] = right[0]
-			right = right[1:]
+			result[i] = arr2[count2]
+			count2++
 		}
-		i++
 	}
-
-	for j := 0; j < len(left); j++ {
-		merged[i] = left[j]
-		i++
-	}
-	for j := 0; j < len(right); j++ {
-		merged[i] = right[j]
-		i++
-	}
-
-	return merged
+	return result
 }
