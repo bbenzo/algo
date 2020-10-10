@@ -53,7 +53,7 @@ func TestBreadthFirstSearch(t *testing.T) {
 		},
 	}
 
-	BreadthFirstSearch(root)
+	BreadthFirstSearchRecursive(root)
 
 	assert.Equal(t, root.Distance, 0)
 	assert.Equal(t, root.Neighbors[0].Distance, 1)
