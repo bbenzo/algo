@@ -3,10 +3,10 @@ package queue
 import "github.com/pkg/errors"
 
 type Node struct {
-	Index       int
-	Predecessor *Node
-	Distance    int
-	Neighbors   []*Node
+	Index             int
+	Predecessor       *Node
+	Distance          int
+	Neighbors         []*Node
 }
 
 type nodeQueue []*Node
