@@ -10,7 +10,7 @@ type Queue interface {
 	Len() int
 }
 
-func New() Queue {
+func NewIntegerQueue() Queue {
 	return &queue{}
 }
 
@@ -24,7 +24,7 @@ func (q *queue) Enqueue(item int) {
 
 func (q *queue) Dequeue() (int, error) {
 	if len(*q) == 0 {
-		return 0, errors.New("queue is empty")
+		return 0, errors.New("nodeQueue is empty")
 	}
 
 	var item int

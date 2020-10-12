@@ -6,7 +6,7 @@ import (
 )
 
 func TestEnqueue(t *testing.T) {
-	q := New()
+	q := NewIntegerQueue()
 
 	q.Enqueue(1)
 	q.Enqueue(8)
@@ -16,7 +16,7 @@ func TestEnqueue(t *testing.T) {
 }
 
 func TestDequeue(t *testing.T) {
-	q := New()
+	q := NewIntegerQueue()
 
 	q.Enqueue(2)
 	q.Enqueue(4)
