@@ -2,13 +2,27 @@ package queue
 
 import "github.com/pkg/errors"
 
-type Queue []int
+type queue []int
 
-func (q *Queue) enqueue(item int) {
+type Queue interface {
+	Enqueue(item int)
+	Dequeue() (int, error)
+	Len() int
+}
+
+func New() Queue {
+	return &queue{}
+}
+
+func (q *queue) Len() int {
+	return len(*q)
+}
+
+func (q *queue) Enqueue(item int) {
 	*q = append(*q, item)
 }
 
-func (q *Queue) dequeue() (int, error) {
+func (q *queue) Dequeue() (int, error) {
 	if len(*q) == 0 {
 		return 0, errors.New("queue is empty")
 	}

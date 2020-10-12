@@ -19,4 +19,3 @@ func BreadthFirstSearchRecursive(root *Node) {
 		BreadthFirstSearchRecursive(neighbor)
 	}
 }
-
