@@ -1,4 +1,4 @@
-package big_o_examples
+package big_o
 
 func recursiveFibonacci(num int) int {
 	if num <= 1 {

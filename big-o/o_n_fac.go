@@ -1,4 +1,4 @@
-package big_o_examples
+package big_o
 
 func factorialAddition(n int) int {
 	for i := 0; i < n; i++ {

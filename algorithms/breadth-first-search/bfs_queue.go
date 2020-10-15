@@ -1,7 +1,7 @@
 package breadth_first_search
 
 import (
-	queue2 "github/bbenzo/algo/data_structures/queue"
+	queue2 "github/bbenzo/algo/data-structures/queue"
 )
 
 func BreadthFirstSearchQueue(root *queue2.Node, value int) *queue2.Node {

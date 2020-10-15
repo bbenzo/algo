@@ -2,7 +2,7 @@ package breadth_first_search
 
 import (
 	"github.com/stretchr/testify/assert"
-	queue2 "github/bbenzo/algo/data_structures/queue"
+	queue2 "github/bbenzo/algo/data-structures/queue"
 	"testing"
 )
 

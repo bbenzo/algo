@@ -1,4 +1,4 @@
-package big_o_examples
+package big_o
 
 // n is the length of the array
 func sum(arr []int, n int) int {

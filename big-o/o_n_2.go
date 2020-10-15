@@ -1,4 +1,4 @@
-package big_o_examples
+package big_o
 
 import "fmt"
 
