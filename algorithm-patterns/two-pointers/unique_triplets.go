@@ -10,7 +10,7 @@ func UniqueTripletsThatAddUpToZero(input []int) [][]int {
 
 	for start < end {
 		sum := input[start] + input[end]
-		if Abs(input[start]) > Abs(input[end]) {
+		if sum < 0 {
 			i := end
 			for i > start {
 				if sum + input[i] == 0  {
