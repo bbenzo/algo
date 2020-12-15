@@ -5,56 +5,56 @@ import (
 	"strconv"
 )
 
-func HappyNumber(num string, squareSums []int) bool {
-	sum := 0
-	for _, val := range digits(num) {
-		sum += val * val
-	}
+func HappyNumber(head *Node) bool {
+	tail := tail(head)
+
+	sum := squaresSum(strconv.Itoa(tail.val))
 
 	if sum == 1 {
 		return true
 	}
 
-	squareSums = append(squareSums, sum)
+	tail.next = &Node{
+		val: sum,
+	}
 
-	if hasCycle(squareSums) {
+	if hasCycle(head) {
 		return false
 	}
 
-	return HappyNumber(strconv.Itoa(sum), squareSums)
+	return HappyNumber(head)
 }
 
-func digits(num string) []int {
-	var digits []int
+func tail(head *Node) *Node {
+	last := head
+	for last.next != nil {
+		last = last.next
+	}
+	return last
+}
 
+func squaresSum(num string) int {
+	result := 0
 	for i := range num {
 		converted, err := strconv.Atoi(string(num[i]))
 		if err != nil {
 			log.Fatalf("no number %v", converted)
 		}
 
-		digits = append(digits, converted)
+		result += converted * converted
 	}
 
-	return digits
+	return result
 }
 
-func hasCycle(arr []int) bool {
-	fast, slow := 0, 0
+func hasCycle(head *Node) bool {
+	fast, slow := head, head
 
-	for slow < len(arr) {
+	for fast.next != nil && fast.next.next != nil {
+		fast = fast.next.next
+		slow = slow.next
 
-		if fast == len(arr) - 2 {
-			fast = 0
-		} else if fast == len(arr) - 1 {
-			fast = 1
-		} else {
-			fast += 2
-		}
-
-		slow++
-
-		if slow == fast {
+		if slow.val == fast.val {
 			return true
 		}
 	}

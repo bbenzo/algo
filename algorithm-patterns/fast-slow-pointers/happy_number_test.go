@@ -6,9 +6,9 @@ import (
 )
 
 func TestHappyNumber(t *testing.T) {
-	assert.True(t, HappyNumber("23", []int{}))
+	assert.True(t, HappyNumber(&Node{val: 23}))
 }
 
 func TestHappyNumberNot(t *testing.T) {
-	assert.False(t, HappyNumber("12", []int{}))
+	assert.False(t, HappyNumber(&Node{val: 12}))
 }
