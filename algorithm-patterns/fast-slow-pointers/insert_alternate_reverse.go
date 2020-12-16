@@ -18,12 +18,23 @@ func InsertAlternateReverse(head *Node) *Node {
 }
 
 func insert(head *Node, reversed *Node) *Node {
-
 	result := head
-	nextReverse := reversed
-	for head != nil && head.next != nil {
-		result.next = nextReverse
+	headToDo := head.next
+
+	result.next = reversed
+	reversedToDo := reversed.next
+
+	last := result.next
+	for last.next != nil && headToDo.next != nil {
+		last.next = headToDo
+		headToDo = headToDo.next
+
+		last.next.next = reversedToDo
+		reversedToDo = reversedToDo.next
+
+		last = last.next.next
+
 	}
 
-	return prev
+	return result
 }
