@@ -1,29 +1,22 @@
 package merge_intervals
 
-import (
-	"sort"
-)
+import "math"
 
 func InsertInterval(intervals Intervals, interval []int) Intervals {
-	sort.Sort(&intervals)
-
 	result := Intervals{}
 
-	mergedWithInterval := []int{interval[0], interval[1]}
+	// find place to insert in sorted list
+	start, end := -1, -1
 	for i := 0; i < len(intervals); i++ {
-		current := intervals[i]
-
-		if (current[0] >= interval[0] && current[0] <= interval[1]) ||
-			(current[1] >= interval[0] && current[0] <= interval[1]) {
-			mergedWithInterval = append(mergedWithInterval, current...)
-		} else {
-			result = append(result, current)
+		if intervals[i][1] < interval[0] || intervals[i][0] > interval[1] {
+			result = append(result, intervals[i])
+			continue
 		}
+
+		start = int(math.Min(float64(interval[0]), float64(intervals[i][0])))
+		end = int(math.Max(float64(interval[1]), float64(intervals[i][1])))
 	}
 
-	sort.Ints(mergedWithInterval)
-
-	result = append(result, []int{mergedWithInterval[0], mergedWithInterval[len(mergedWithInterval) - 1]})
-
+	result = append(result, []int{start, end})
 	return result
 }
