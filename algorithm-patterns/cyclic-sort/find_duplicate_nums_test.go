@@ -5,20 +5,18 @@ import (
 	"testing"
 )
 
-func TestFindDuplicateNum(t *testing.T) {
-	arr := []int{1, 4, 4, 3, 2}
+func TestFindDuplicateNums1(t *testing.T) {
+	arr := []int{3, 4, 4, 5, 5}
 
-	assert.Equal(t, 4, FindDuplicateNum(arr))
+	expected := []int{5, 4}
+
+	assert.Equal(t, expected, FindDuplicateNums(arr))
 }
 
-func TestFindDuplicateNum2(t *testing.T) {
-	arr := []int{2, 1, 3, 3, 5, 4}
+func TestFindDuplicateNums2(t *testing.T) {
+	arr := []int{5, 4, 7, 2, 3, 5, 3}
 
-	assert.Equal(t, 3, FindDuplicateNum(arr))
-}
+	expected := []int{3, 5}
 
-func TestFindDuplicateNum3(t *testing.T) {
-	arr := []int{2, 4, 1, 4, 4}
-
-	assert.Equal(t, 4, FindDuplicateNum(arr))
+	assert.Equal(t, expected, FindDuplicateNums(arr))
 }
