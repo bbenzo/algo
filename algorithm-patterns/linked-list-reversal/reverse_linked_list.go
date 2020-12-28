@@ -13,6 +13,15 @@ func (n *node) Tail() *node {
 	return n
 }
 
+func (n *node) Push(newNode *node) {
+	for n.next != nil {
+		n = n.next
+	}
+
+	n.next = newNode
+
+}
+
 func Reverse(current *node) *node {
 	var previous *node
 	var next *node
