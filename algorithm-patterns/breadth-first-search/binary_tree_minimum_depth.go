@@ -17,12 +17,17 @@ func BinaryTreeMinimumDepth(root *node) int {
 				panic(err)
 			}
 
-			if item.left == nil || item.right == nil {
+			if item.left == nil && item.right == nil {
 				return depth
 			}
 
-			q.Enqueue(item.left)
-			q.Enqueue(item.right)
+			if item.left != nil {
+				q.Enqueue(item.left)
+			}
+
+			if item.right != nil {
+				q.Enqueue(item.right)
+			}
 		}
 	}
 
