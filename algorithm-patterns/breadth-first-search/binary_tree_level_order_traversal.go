@@ -8,6 +8,14 @@ type node struct {
 	right *node
 }
 
+func (n *node) PushLeft(newNode *node) {
+	for n.left != nil {
+		n = n.left
+	}
+
+	n.left = newNode
+}
+
 type queue []*node
 
 type Queue interface {
