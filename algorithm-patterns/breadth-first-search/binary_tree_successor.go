@@ -1,33 +1,31 @@
 package breadth_first_search
 
-func BinaryTreeSuccessor(root *node) *node {
-	var result *node
-
+func BinaryTreeSuccessor(root *node) {
 	q := queue{}
 	q.Enqueue(root)
 
+	var current, previous *node
 	for q.Len() > 0 {
-		item, err := q.Dequeue()
+		var err error
+		current, err = q.Dequeue()
 		if err != nil {
 			panic(err)
 		}
 
-		if item.left != nil {
-			q.Enqueue(item.left)
-			item.left = nil
+		if previous != nil {
+			previous.left = current
 		}
 
-		if item.right != nil {
-			q.Enqueue(item.right)
-			item.right = nil
+		previous = current
+
+		if current.left != nil {
+			q.Enqueue(current.left)
+			current.left = nil
 		}
 
-		if result == nil {
-			result = item
-		} else {
-			result.PushLeft(item)
+		if current.right != nil {
+			q.Enqueue(current.right)
+			current.right = nil
 		}
 	}
-
-	return result
 }

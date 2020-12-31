@@ -32,5 +32,7 @@ func TestBinaryTreeSuccessor(t *testing.T) {
 		},
 	}
 
-	assert.Equal(t, expected, BinaryTreeSuccessor(root))
+	BinaryTreeSuccessor(root)
+
+	assert.Equal(t, expected, root)
 }
