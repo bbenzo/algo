@@ -4,34 +4,29 @@ func BinaryTreeLevelOrderSuccessor(root *node, k int) int {
 	q := queue{}
 	q.Enqueue(root)
 
-	var last *node
 	for q.Len() > 0 {
-		length := q.Len()
+		item, err := q.Dequeue()
+		if err != nil {
+			panic(err)
+		}
 
-		i := 0
-		for i < length {
-			item, err := q.Dequeue()
-			if err != nil {
-				panic(err)
-			}
+		if item.left != nil {
+			q.Enqueue(item.left)
+		}
 
-			if last != nil && last.val == k {
-				return item.val
-			} else {
-				last = item
-			}
+		if item.right != nil {
+			q.Enqueue(item.right)
+		}
 
-			if item.left != nil {
-				q.Enqueue(item.left)
-			}
-
-			if item.right != nil {
-				q.Enqueue(item.right)
-			}
-
-			i++
+		if item.val == k {
+			break
 		}
 	}
 
-	return -1
+	item, err := q.Dequeue()
+	if err != nil {
+		panic(err)
+	}
+
+	return item.val
 }
