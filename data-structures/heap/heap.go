@@ -1,0 +1,41 @@
+package heap
+
+type MinIntHeap []int
+
+func (h MinIntHeap) Len() int           { return len(h) }
+func (h MinIntHeap) Less(i, j int) bool { return h[i] < h[j] }
+func (h MinIntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+func (h *MinIntHeap) Push(x interface{}) {
+	// Push and Pop use pointer receivers because they modify the slice's length,
+	// not just its contents.
+	*h = append(*h, x.(int))
+}
+
+func (h *MinIntHeap) Pop() interface{} {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0 : n-1]
+	return x
+}
+
+type MaxIntHeap []int
+
+func (h MaxIntHeap) Len() int           { return len(h) }
+func (h MaxIntHeap) Less(i, j int) bool { return h[i] > h[j] }
+func (h MaxIntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+func (h *MaxIntHeap) Push(x interface{}) {
+	// Push and Pop use pointer receivers because they modify the slice's length,
+	// not just its contents.
+	*h = append(*h, x.(int))
+}
+
+func (h *MaxIntHeap) Pop() interface{} {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0 : n-1]
+	return x
+}
