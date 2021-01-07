@@ -2,18 +2,20 @@ package two_heaps
 
 func SlidingWindowMedian(nums []int, k int) []float64 {
 	var result []float64
+	s := newStream()
 
-	i := k
-	for i <= len(nums) {
+	i := 0
+	for i < len(nums) {
+		s.insert(nums[i])
+
 		j := i - k
-
-		s := newStream()
-		for j < i {
-			s.insert(nums[j])
-			j++
+		if j > -1 {
+			s.remove(nums[j])
 		}
 
-		result = append(result, s.median())
+		if i >= k-1 {
+			result = append(result, s.median())
+		}
 
 		i++
 	}

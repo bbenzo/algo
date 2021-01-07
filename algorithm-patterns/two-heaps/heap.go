@@ -19,6 +19,23 @@ func (h *MinIntHeap) Pop() int {
 	return x
 }
 
+func (h *MinIntHeap) Remove(val int) {
+	index := -1
+
+	for i := range *h {
+		if (*h)[i] == val {
+			index = i
+			break
+		}
+	}
+
+	if index == -1 {
+		return
+	}
+
+	*h = append((*h)[:index], (*h)[index+1:]...)
+}
+
 type MaxIntHeap []int
 
 func (h MaxIntHeap) Len() int           { return len(h) }
@@ -36,4 +53,21 @@ func (h *MaxIntHeap) Pop() int {
 	x := old[0]
 	*h = old[1:]
 	return x
+}
+
+func (h *MaxIntHeap) Remove(val int) {
+	index := -1
+
+	for i := range *h {
+		if (*h)[i] == val {
+			index = i
+			break
+		}
+	}
+
+	if index == -1 {
+		return
+	}
+
+	*h = append((*h)[:index], (*h)[index+1:]...)
 }

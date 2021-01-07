@@ -17,6 +17,16 @@ func newStream() *stream {
 	}
 }
 
+func (s *stream) remove(val int) {
+	if val <= (*s.maxHeap)[0] {
+		s.maxHeap.Remove(val)
+	} else {
+		s.minHeap.Remove(val)
+	}
+
+	s.rebalance()
+}
+
 func (s *stream) insert(val int) {
 	if len(*s.maxHeap) == 0 || val < (*s.maxHeap)[0] {
 		s.maxHeap.Push(val)
@@ -24,6 +34,10 @@ func (s *stream) insert(val int) {
 		s.minHeap.Push(val)
 	}
 
+	s.rebalance()
+}
+
+func (s *stream) rebalance() {
 	diff := s.maxHeap.Len() - s.minHeap.Len()
 	if diff > 1 {
 		largest := s.maxHeap.Pop()
@@ -41,10 +55,10 @@ func (s *stream) median() float64 {
 
 	diff := s.maxHeap.Len() - s.minHeap.Len()
 	if diff == 0 {
-		return (float64(s.minHeap.Pop()) + float64(s.maxHeap.Pop())) / 2
+		return (float64((*s.minHeap)[0]) + float64((*s.maxHeap)[0])) / 2
 	} else if diff > 0 {
-		return float64(s.maxHeap.Pop())
+		return float64((*s.maxHeap)[0])
 	} else {
-		return float64(s.minHeap.Pop())
+		return float64((*s.minHeap)[0])
 	}
 }
