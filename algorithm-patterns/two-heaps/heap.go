@@ -55,6 +55,14 @@ func (h *MaxIntHeap) Pop() int {
 	return x
 }
 
+func (h *MaxIntHeap) Top() int {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[:n-1]
+	return x
+}
+
 func (h *MaxIntHeap) Remove(val int) {
 	index := -1
 
